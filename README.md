@@ -1,2 +1,2 @@
 # vue_slider
-hjhjk
+fast solution for steps slider
