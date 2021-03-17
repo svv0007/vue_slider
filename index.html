@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Basics</title>
+    <link rel="stylesheet" href="theme.css" />
+    <style>
+      [v-cloak] {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="container" id="app"> 
+      <div class="card">
+        <h4>{{ title }}</h4>
+        <div class="slider">
+          <div class="slide-body">
+            <div>
+              {{ slideActive.text }}
+            </div>
+          </div>
+          <div class="slide-navigation">
+            <div 
+              class="slide-number"
+              v-for="(section, i) in slideData"
+              :key="i"
+              @click.prevent="activeSlide(i, $event)"
+              :class="{
+                'active': i === activeIndex,
+                'showed': i < activeIndex
+              }"
+            >
+              {{ section.title }}
+            </div>
+          </div>
+          <div v-if="!finished">
+            <button
+              class="btn"
+              :disabled="!backActive"
+              @click="prevSlide()"
+            >
+              Back
+            </button>
+            <button
+              class="btn primary"
+              @click="nextSlide()"
+            >
+              {{ isLast ? 'Finished' : 'Next' }}
+            </button>
+          </div>
+          <div v-else>
+            <button
+              class="btn"
+              @click="reset()"
+            >
+              reset
+            </button>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
